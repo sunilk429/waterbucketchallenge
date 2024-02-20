@@ -44,6 +44,7 @@ const Container = ({ id, N }) => {
   };
 
   const handleEmptyWaterTank = () => {
+    if (totalWaterLevel / N + level === 0) return;
     console.log(`reducedwater: ${totalWaterLevel / N}`);
     const reducedWater = totalWaterLevel / N;
     setLevel((prev) => -reducedWater);
@@ -61,7 +62,7 @@ const Container = ({ id, N }) => {
 
     const intervalId = setInterval(() => {
       currentPercentage += step;
-      setPercentage(currentPercentage);
+      setPercentage(Math.abs(currentPercentage));
 
       if (
         (step > 0 && currentPercentage >= newPercentage) ||
