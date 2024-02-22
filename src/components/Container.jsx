@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useTotalWater } from "../context/Context";
 
 const MAX_LEVEL = 160; //160 scaled for 1000
 const MAX_REFILL = 32; //1000/160->5 => 160/5->32
 
-const Container = ({ id, N }) => {
-  const { totalWaterLevel, setTotalWaterLevel } = useTotalWater();
+const Container = ({ id, N, totalWaterLevel, setTotalWaterLevel }) => {
   const [level, setLevel] = useState(totalWaterLevel / N);
   const [intervalId, setIntervalId] = useState(null);
   const [counter, setCounter] = useState(0);
@@ -73,7 +71,7 @@ const Container = ({ id, N }) => {
     }, 100); // Adjust timing for smoother or faster transition
 
     return () => clearInterval(intervalId);
-  }, [totalWaterLevel, level]);
+  }, [totalWaterLevel, level, setLevel]);
 
   return (
     <div className="flex flex-col gap-8 p-4 max-w-80">
