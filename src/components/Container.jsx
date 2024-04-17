@@ -7,9 +7,6 @@ const Container = ({ id, N, totalWaterLevel, setTotalWaterLevel }) => {
   const [level, setLevel] = useState(totalWaterLevel / N);
   const [intervalId, setIntervalId] = useState(null);
   const [counter, setCounter] = useState(0);
-  const [percentage, setPercentage] = useState(
-    ((totalWaterLevel / N + level) / MAX_LEVEL) * 100
-  );
 
   console.log(`id: ${id} waterLevel:${level} totalWater:${totalWaterLevel}`);
   const handleAddWaterStart = () => {
@@ -52,26 +49,6 @@ const Container = ({ id, N, totalWaterLevel, setTotalWaterLevel }) => {
       setLevel(0);
     }, 1000);
   };
-  useEffect(() => {
-    const newPercentage = ((totalWaterLevel / N + level) / MAX_LEVEL) * 100;
-    const difference = newPercentage - percentage;
-    const step = difference / 5; // Adjust the number of steps
-    let currentPercentage = percentage;
-
-    const intervalId = setInterval(() => {
-      currentPercentage += step;
-      setPercentage(Math.abs(currentPercentage));
-
-      if (
-        (step > 0 && currentPercentage >= newPercentage) ||
-        (step < 0 && currentPercentage <= newPercentage)
-      ) {
-        clearInterval(intervalId);
-      }
-    }, 100); // Adjust timing for smoother or faster transition
-
-    return () => clearInterval(intervalId);
-  }, [totalWaterLevel, level, setLevel]);
 
   return (
     <div className="flex flex-col gap-8 p-4 max-w-80">
@@ -104,11 +81,6 @@ const Container = ({ id, N, totalWaterLevel, setTotalWaterLevel }) => {
             background: "#74ccf4",
           }}
         ></div>
-      </div>
-      <div className="flex justify-center items-center">
-        <span className="text-blue-700" style={{ transition: "width 0.5s" }}>
-          {percentage.toFixed(2)} %
-        </span>
       </div>
     </div>
   );
