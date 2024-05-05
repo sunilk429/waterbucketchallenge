@@ -5,6 +5,7 @@ const N = 4;
 
 const App = () => {
   const [totalWaterLevel, setTotalWaterLevel] = useState(0);
+  const [totalPercentage, setTotalPercentage] = useState(0);
   return (
     <div className="flex flex-col gap-12 justify-center items-center select-none pt-10 ">
       <h1
@@ -21,6 +22,8 @@ const App = () => {
             N={N}
             totalWaterLevel={totalWaterLevel}
             setTotalWaterLevel={setTotalWaterLevel}
+            totalPercentage={totalPercentage}
+            setTotalPercentage={setTotalPercentage}
           />
         ))}
       </div>

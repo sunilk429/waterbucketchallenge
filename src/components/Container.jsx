@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const MAX_LEVEL = 160; //160 scaled for 1000
 const MAX_REFILL = 32; //1000/160->5 => 160/5->32
@@ -81,6 +81,18 @@ const Container = ({ id, N, totalWaterLevel, setTotalWaterLevel }) => {
             background: "#74ccf4",
           }}
         ></div>
+      </div>
+      <div className="flex justify-center items-center">
+        <p className="text-xl">
+          {" "}
+          {level > 0
+            ? (
+                (totalWaterLevel / N / MAX_LEVEL) * 100 +
+                (level / MAX_LEVEL) * 100
+              ).toFixed(2)
+            : ((totalWaterLevel / N / MAX_LEVEL) * 100).toFixed(2)}
+          %
+        </p>
       </div>
     </div>
   );
